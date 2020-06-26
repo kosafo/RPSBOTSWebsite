@@ -32,6 +32,18 @@ var server = http.createServer(function (req, res) {
     }
 });
 
+
+let express = require('express');
+var http = express.createServer();
+
+// set up a route to redirect http to https
+http.get('*', function(req, res) {  
+    res.redirect('https://' + req.headers.host + req.url);
+
+    // Or, if you don't want to automatically detect the domain name from the request header, you can hard code it:
+    // res.redirect('https://example.com' + req.url);
+})
+
 // Listen on port 3000, IP defaults to 127.0.0.1
 server.listen(port);
 
